@@ -26,8 +26,8 @@ export function verifyMetaWebhookSignature(
   if (!secret) {
     console.error(
       '[webhook] META_APP_SECRET is not set — rejecting request. ' +
-        'Configure the env var (Meta → App Settings → Basic → App Secret) ' +
-        'to enable signature verification.',
+      'Configure the env var (Meta → App Settings → Basic → App Secret) ' +
+      'to enable signature verification.',
     )
     return false
   }
@@ -38,6 +38,8 @@ export function verifyMetaWebhookSignature(
   const expected =
     'sha256=' +
     crypto.createHmac('sha256', secret).update(rawBody).digest('hex')
+
+  console.log(expected);
 
   const a = Buffer.from(signatureHeader)
   const b = Buffer.from(expected)
